@@ -74,11 +74,19 @@ h2 {
   font-size: 8px;
 }
 
-.specialities {
+.specialities,
+.copy {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.copy {
+  margin-top: 50px;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .specialities ul {
