@@ -14,7 +14,7 @@ function calC(Op) {
     case "*":
       return (Number(firstOperand) * Number(secondOperand)).toFixed(2);
       break;
-    case "÷":
+    case "/":
       return (Number(firstOperand) / Number(secondOperand)).toFixed(2);
       break;
 
@@ -26,9 +26,7 @@ function calC(Op) {
 // const result = firstOperand + secondOperand;
 
 // console.log(result);
-
-document.querySelector("#calculator").addEventListener("click", (e) => {
-  const newEntry = e.target.value;
+function doCalculations(newEntry) {
   if (newEntry === "ac") {
     firstOperand = "";
     secondOperand = "";
@@ -66,7 +64,7 @@ document.querySelector("#calculator").addEventListener("click", (e) => {
     newEntry === "+" ||
     newEntry === "-" ||
     newEntry === "*" ||
-    newEntry === "÷"
+    newEntry === "/"
   ) {
     if (!firstOperand) {
       return;
@@ -81,7 +79,7 @@ document.querySelector("#calculator").addEventListener("click", (e) => {
         Operator = newEntry;
       }
     }
-  } else if (newEntry === "=") {
+  } else if (newEntry === "=" || newEntry === "Enter") {
     if (!secondOperand) {
       document.getElementById("result").innerText = firstOperand;
     } else {
@@ -95,4 +93,19 @@ document.querySelector("#calculator").addEventListener("click", (e) => {
   document.getElementById(
     "calculations"
   ).innerText = `${firstOperand} ${Operator} ${secondOperand} `;
+}
+document.querySelector("#calculator").addEventListener("click", (e) => {
+  const newEntry = e.target.value;
+  doCalculations(newEntry);
 });
+
+// Add event listener on keypress
+document.addEventListener(
+  "keypress",
+  (event) => {
+    const newEntry = event.key;
+    console.log(`Button Pressed ${event.key}`);
+    doCalculations(newEntry);
+  },
+  false
+);
