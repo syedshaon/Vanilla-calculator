@@ -6,16 +6,24 @@ let Operator = "";
 function calC(Op) {
   switch (Op) {
     case "+":
-      return (Number(firstOperand) + Number(secondOperand)).toFixed(2);
+      return (Number(firstOperand) + Number(secondOperand))
+        .toFixed(2)
+        .replace(/[.,]00$/, "");
       break;
     case "-":
-      return (Number(firstOperand) - Number(secondOperand)).toFixed(2);
+      return (Number(firstOperand) - Number(secondOperand))
+        .toFixed(2)
+        .replace(/[.,]00$/, "");
       break;
     case "*":
-      return (Number(firstOperand) * Number(secondOperand)).toFixed(2);
+      return (Number(firstOperand) * Number(secondOperand))
+        .toFixed(2)
+        .replace(/[.,]00$/, "");
       break;
     case "/":
-      return (Number(firstOperand) / Number(secondOperand)).toFixed(2);
+      return (Number(firstOperand) / Number(secondOperand))
+        .toFixed(2)
+        .replace(/[.,]00$/, "");
       break;
 
     default:
@@ -27,7 +35,14 @@ function calC(Op) {
 
 // console.log(result);
 function doCalculations(newEntry) {
-  if (newEntry === "ac") {
+  if (newEntry === "c") {
+    if (secondOperand) {
+      secondOperand = secondOperand.slice(0, -1);
+    } else if (firstOperand) {
+      console.log(firstOperand.slice(0, -1));
+      firstOperand = firstOperand.slice(0, -1);
+    }
+  } else if (newEntry === "ac") {
     firstOperand = "";
     secondOperand = "";
     Operator = "";
@@ -109,3 +124,5 @@ document.addEventListener(
   },
   false
 );
+
+document.getElementById("year").innerText = new Date().getFullYear();
